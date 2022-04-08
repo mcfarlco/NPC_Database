@@ -1,0 +1,35 @@
+{
+  "name": "npcs",
+  "version": "1.0.0",
+  "description": "Server for NPC Database",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Corey McFarland",
+  "license": "ISC",
+  "dependencies": {
+    "asyncawait": "^3.0.0",
+    "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "express-session": "^1.17.1",
+    "express-sessions": "^1.0.6",
+    "forever": "^3.0.4",
+    "handlebars-form-helpers": "^0.1.4",
+    "mysql": "^2.18.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcfarlco/CS340_Project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcfarlco/CS340_Project/issues"
+  },
+  "homepage": "https://github.com/mcfarlco/CS340_Project#readme"
+}

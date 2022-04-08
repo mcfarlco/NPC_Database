@@ -1,0 +1,280 @@
+<body>
+  <h1>{{title}}</h1>
+  <table>
+    <tr>
+      <td>
+        <section id="detail_npc">
+          <form class="" action={{#ifEquals view "add" "add" "add"}}"/add"{{/ifEquals}}{{#ifEquals view "details" "details" "details"}}"/update"{{/ifEquals}} method="post">
+            <h2>NPC Details</h2>
+            <table>
+              <tr>
+                <td>
+                  First Name:
+                </td>
+                <td>
+                  {{#ifEquals view "details" "details" "details"}}
+                  <input type="hidden" name="table_name" value="npcs">
+                  <input type="hidden" name="npc_id" value={{npcs.npc_id}}>
+                  {{/ifEquals}}
+                  <input type="text" name="first_name" value={{npcs.first_name}}>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Last Name:
+                </td>
+                <td>
+                  <input type="text" name="last_name" value={{npcs.last_name}}>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Location:
+                </td>
+                <td>
+                  <input list="locations" name="location_id" value={{npcs.location_id}}>
+                  <datalist id="locations">
+                    {{#each locations}}
+                      <option value="{{this.[0]}}">{{this.[1]}}</option>
+                    {{/each}}
+                  </datalist>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Creature Type:
+                </td>
+                <td>
+                  <input list="creature_types" name="creature_type_id" value={{npcs.creature_type_id}}>
+                  <datalist id="creature_types">
+                    {{#each creature_types}}
+                      <option value="{{this.[0]}}">{{this.[1]}}</option>
+                    {{/each}}
+                  </datalist>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Age:
+                </td>
+                <td>
+                  <input type="number" name="age" value={{npcs.age}}>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Vendor (0 - No, 1 - Yes):
+                </td>
+                <td>
+                  <input type="number" name="vendor" value={{npcs.vendor}}>
+                </td>
+              </tr>
+      </tr>
+    </table>
+    {{#ifEquals view "add" "add" "add"}}
+      <input type="hidden" name="table_name" value="npcs">
+      <input type="submit" value="Add">
+    {{/ifEquals}}
+    {{#ifEquals view "details" "details" "details"}}
+      <input type="submit" name="update-npc" value="Update">
+      <a href="/delete?table=npcs&id={{npcs.npc_id}}&idKey=npc_id"><button type="button">Delete</button></a>
+    {{/ifEquals}}
+    </form>
+    </section>
+  </td>
+{{#ifNotEquals view "add"}}
+  <td>
+    <table>
+      <tr>
+        <td>
+          <section id="detail_traits">
+            <h2>Traits</h2>
+            <table>
+              <tr>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input list="traits" name="trait1_id" value="{{traits.trait1_id}}">
+                    <datalist id="traits">
+                      {{#each trait_list}}
+                        <option value="{{this.[0]}}">{{this.[1]}}</option>
+                      {{/each}}
+                    </datalist>
+                    <input type="submit" name="update-trait-1" value="Update">
+                  </form>
+                </td>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input type="hidden" name="trait1_id" value="">
+                    <input type="submit" name="delete-trait-1" value="Delete">
+                  </form>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input list="traits" name="trait2_id" value={{traits.trait2_id}}>
+                    <datalist id="traits">
+                      {{#each trait_list}}
+                        <option value="{{this.[0]}}">{{this.[1]}}</option>
+                      {{/each}}
+                    </datalist>
+                    <input type="submit" name="update-trait-2" value="Update">
+                  </form>
+                </td>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input type="hidden" name="trait2_id" value="">
+                    <input type="submit" name="delete-trait-2" value="Delete">
+                  </form>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input list="traits" name="trait3_id" value={{traits.trait3_id}}>
+                    <datalist id="traits">
+                      {{#each trait_list}}
+                        <option value="{{this.[0]}}">{{this.[1]}}</option>
+                      {{/each}}
+                    </datalist>
+                    <input type="submit" name="update-trait-3" value="Update">
+                  </form>
+                </td>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input type="hidden" name="trait3_id" value="">
+                    <input type="submit" name="delete-trait-3" value="Delete">
+                  </form>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input list="traits" name="trait4_id" value={{traits.trait4_id}}>
+                    <datalist id="traits">
+                      {{#each trait_list}}
+                        <option value="{{this.[0]}}">{{this.[1]}}</option>
+                      {{/each}}
+                    </datalist>
+                    <input type="submit" name="update-trait-4" value="Update">
+                  </form>
+                </td>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input type="hidden" name="trait4_id" value="">
+                    <input type="submit" name="delete-trait-4" value="Delete">
+                  </form>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input list="traits" name="trait5_id" value={{traits.trait5_id}}>
+                    <datalist id="traits">
+                      {{#each trait_list}}
+                        <option value="{{this.[0]}}">{{this.[1]}}</option>
+                      {{/each}}
+                    </datalist>
+                    <input type="submit" name="update-trait-5" value="Update">
+                  </form>
+                </td>
+                <td>
+                  <form class="" action="/update" method="post">
+                    <input type="hidden" name="table_name" value="npc_traits">
+                    <input type="hidden" name="npc_id" value="{{npcs.npc_id}}">
+                    <input type="hidden" name="trait5_id" value="">
+                    <input type="submit" name="delete-trait-5" value="Delete">
+                  </form>
+                </td>
+              </tr>
+            </table>
+          </section>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <section id="detail_items">
+            <h2>Items</h2>
+            <table>
+              <tr>
+                <table>
+                  <tr>
+                    <th class="table-h"><input type="text" readonly name="" class="table-h" value="Item Id"></th>
+                    <th class="table-h"><input type="text" readonly name="" class="table-h" value="Item Quantity"></th>
+                  </tr>
+                </table>
+              </tr>
+              {{#each items}}
+                <tr>
+                  <td>
+                    <form class="" action="/update" method="post">
+                      <input type="hidden" name="table_name" value="npc_items">
+                      <input type="hidden" name="npc_id" value="{{../npcs.npc_id}}">
+                      <input type="hidden" name="item_id" value={{this.item_id}}>
+                      <table>
+                        <tr>
+                          <td>
+                            <input list="items_list" name="item_id" value={{this.item_id}}>
+                            <datalist id="items_list">
+                              {{#each ../items_list}}
+                                <option value="{{this.[0]}}">{{this.[1]}}</option>
+                              {{/each}}
+                            </datalist>
+                          </td>
+                          <td>
+                            <input type="number" name="item_quantity" value={{this.item_quantity}}>
+                          </td>
+                          <td>
+                            <input type="submit" name="update-npc-item" value="Update">
+                            <a href="/dmm?table=npc_items&id1={{../npcs.npc_id}}&id2={{this.item_id}}&idKey1=npc_id&idKey2=item_id"><button type="button">Delete</button></a>
+                          </td>
+                        </tr>
+                      </table>
+                    </form>
+                  </td>
+                </tr>
+              {{/each}}
+              <tr>
+                <td>
+                  <form class="" action="/add" method="post">
+                    <input type="hidden" name="npc_id" value={{npcs.npc_id}}>
+                    <input list="items_list" name="item_id" value="" placeholder="Item Id">
+                    <datalist id="items_list">
+                      {{#each ../items_list}}
+                        <option value="{{this.[0]}}">{{this.[1]}}</option>
+                      {{/each}}
+                    </datalist>
+                    <input type="number" name="item_quantity" value="" placeholder="Item Quantity">
+                    <input type="hidden" name="table_name" value="npc_items">
+                    <input type="submit" value="Add">
+                  </form>
+                </td>
+              </tr>
+            </table>
+          </section>
+        </td>
+      </tr>
+    </table>
+  </td>
+  {{/ifNotEquals}}
+  </tr>
+  </table>
+</body>

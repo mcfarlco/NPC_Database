@@ -1,0 +1,140 @@
+<section>
+  {{#if alert}}
+    <h2>{{alert}}</h2>
+  {{/if}}
+  {{#ifEquals view "filter" "update" "delete"}}
+    <h1 style="text-transform:capitalize;">{{table}} {{view}}</h1>
+    <form class="" action="/filter" method="post">
+      <table>
+        <tr>
+          <td>
+            {{#each fields}}
+              {{#if @first}}
+              {{else}}
+                <label for="filter_button"><input type="radio" name="filter_table" value="{{this.name}}">{{this.name}}</label>
+              {{/if}}
+            {{/each}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="hidden" name="table_name" value={{table}}>
+            <input type="text" name="filter_key" value="" placeholder="Filter by...">
+            <input type="submit" name="filter_button" value="Filter">
+          </td>
+        </tr>
+      </table>
+    </form>
+    <br>
+    {{#ifEquals table "npcs" "npcs" "npcs"}}
+      <a href="/detail?table=npcs&view=add">Change View (Add)</a>
+    {{/ifEquals}}
+    {{#ifNotEquals table "npcs"}}
+      <a href="/table?table={{table}}&view=add">Change View (Add)</a>
+    {{/ifNotEquals}}
+  {{/ifEquals}}
+  {{#ifEquals view "add" "add" "add"}}
+    <h1 style="text-transform:capitalize;">{{view}} {{table}}</h1>
+    <form class="" id="addForm" action="/add" method="post">
+      <table>
+        {{#each fields}}
+          {{#if @first}}
+          {{else}}
+            <tr>
+              <td>
+                <input type="text" name="{{this.name}}" value="" placeholder="{{this.name}}">
+              </td>
+            </tr>
+          {{/if}}
+        {{/each}}
+        <tr>
+          <td>
+            <input type="hidden" name="table_name" value={{table}}>
+            <input type="submit" id="add_button" value="Add">
+          </td>
+        </tr>
+      </table>
+    </form>
+    <br>
+    <a href="/table?table={{table}}&view=filter">Change View (Filter)</a>
+  {{/ifEquals}}
+</section>
+<br>
+<section>
+  <h1 style="text-transform:capitalize;">{{table}} Database</h1>
+  <table id="databaseTable">
+    {{#each rows}}
+      <tr>
+        <td>
+          {{#if @first}}
+            <table>
+              <tr>
+                {{#each this}}
+                  {{#if @first}}
+                    <th hidden>
+                      <input type="hidden" readonly name="" class="table-h" value="{{this}}">
+                    </th>
+                  {{else if @last}}
+                    <th class="table-h">
+                      <input type="text" readonly name="" class="table-h" value="{{this}}{{#ifEquals this "drop_only" "vendor" "vendor"}} (0-No, 1-Yes){{/ifEquals}}">
+                    </th>
+                    <th></th>
+                    <th></th>
+                  {{else}}
+                    <th class="table-h">
+                      <input type="text" readonly name="" class="table-h" value="{{this}}{{#ifEquals this "drop_only" "vendor" "vendor"}} (0-No, 1-Yes){{/ifEquals}}">
+                    </th>
+                  {{/if}}
+                {{/each}}
+              </tr>
+            </table>
+          {{else}}
+            <form id="database-form-{{this.[0]}}" action="/update" method="post">
+              <table>
+                <tr>
+                  {{#each this}}
+                    {{#if @first}}
+                      <td hidden>
+                        <input type="hidden" name="table_name" value="{{../../table}}">
+                        <input type="hidden" name="{{lookup ../../rows.[0] @index}}" value="{{this}}">
+                      </td>
+                    {{else}}
+                      {{#ifEquals ../../table "items" "items" "items"}}
+                        {{#ifEquals @index 2 2 2}}
+                        <td>
+                          <input list="item_type" name="{{lookup ../../rows.[0] @index}}" value="{{this}}">
+                          <datalist id="item_type">
+                            {{#each ../../item_types}}
+                              <option value="{{this.[0]}}">{{this.[1]}}</option>
+                            {{/each}}
+                          </datalist>
+                        </td>
+                        {{else}}
+                          <td>
+                            <input type="text" name="{{lookup ../../rows.[0] @index}}" value="{{this}}">
+                          </td>
+                        {{/ifEquals}}
+                      {{else}}
+                      <td>
+                        <input type="text" name="{{lookup ../../rows.[0] @index}}" value="{{this}}">
+                      </td>
+                      {{/ifEquals}}
+                    {{/if}}
+                  {{/each}}
+                  {{#ifEquals ../table "npcs" "npcs" "npcs"}}
+                    <td><a href="/detail?table=npcs&view=details&id={{this.[0]}}"><button type="button">Details</button></a></td>
+                    <td><a href="/delete?table={{../table}}&id={{this.[0]}}&idKey={{../idKey}}"><button type="button">Delete</button></a></td>
+                  {{/ifEquals}}
+                  {{#ifNotEquals ../table "npcs"}}
+                    <td><input type="submit" name="update-button-{{this.[0]}}" value="Update"></td>
+                    <td><a href="/delete?table={{../table}}&id={{this.[0]}}&idKey={{../idKey}}"><button type="button">Delete</button></a></td>
+                  {{/ifNotEquals}}
+                </tr>
+              </table>
+            </form>
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
+  </table>
+</section>

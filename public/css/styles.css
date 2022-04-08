@@ -1,0 +1,18 @@
+header {
+  margin-bottom: 40px;
+}
+
+.table-h {
+  border-color: transparent;
+  font-weight: bold;
+  width: 156.8px;
+}
+
+table {
+  width: 156.8px;
+  table-layout: fixed;
+}
+
+input[type=text] {
+  width: 156.8px;
+}
